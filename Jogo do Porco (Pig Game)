@@ -1,0 +1,75 @@
+import random
+import os
+
+def main():
+    p_limite = input("Digite a pontuação necessária para ganhar ")
+    regras()
+    jogador_1 = 0
+    jogador_2 = 0
+    while jogador_1 < int(p_limite) and jogador_2 < int(p_limite):
+        print ("Pontuação do jogador 1: " +str(jogador_1))
+        print ("Pontuação do jogador 2: " +str(jogador_2))
+        r = turno(1)
+        jogador_1 += r
+        print ("Pontuação do jogador 1: " +str(jogador_1))
+        print ("Pontuação do jogador 2: " +str(jogador_2))
+        r = turno(2)
+        jogador_2 += r
+        print ("Fim de rodada")
+        print ("Pontuação do jogador 1: " +str(jogador_1))
+        print ("Pontuação do jogador 2: " +str(jogador_2))
+        input( "Aperte enter para continuar")
+        clear()
+    if jogador_1>jogador_2:
+        print ("Fim de jogo!")
+        print ("O Jogador 1 ganhou")
+        print ("Pontuação do jogador 1: " +str(jogador_1))
+        print ("Pontuação do jogador 2: " +str(jogador_2))
+        exit()
+    elif jogador_2>jogador_1:
+        print ("Fim de jogo!")
+        print ("O jogador 2 ganhou")
+        print ("Pontuação do jogador 1: " +str(jogador_1))
+        print ("Pontuação do jogador 2: " +str(jogador_2))
+        exit()
+    else:
+        print ("O jogo empatou!")
+        print ("Pontuação do jogador 1: " +str(jogador_1))
+        print ("Pontuação do jogador 2: " +str(jogador_2))
+        exit()
+
+def dado():
+    r = random.randrange(1, 6)
+    return r
+
+def turno(jogador):
+    pontos=0
+    rolar_dados=1
+    print ("Turno do jogador ", jogador)
+    input( "Aperte enter para continuar")
+    while rolar_dados==1:
+        r = dado()
+        print ("O dado deu", r)
+        if r == 1:
+            pontos=0
+            rolar_dados=0
+        else:
+            pontos += r
+            print ("Seu total é ", pontos)
+            s= input ("Deseja rodar novamente? s=sim n=não ")
+            if s== "s":
+                rolar_dados= 1
+            else:
+                rolar_dados= 0
+    print ("Seu turno acabou")
+    return pontos
+
+def regras():
+    print ("Regras:\n    1- O jogo do porco consiste em um jogador rodar um dado para acumular uma pontuação mínima para ganhar.\n    2- O jogador pode rodar o dado quantas vezes quiser, até tirar o número 1.\n    3- As jogadas de 2 até 6 irão acumulando sua pontuação.\n    4- Ao tirar o número 1, a pontuação da sua rodada é zerada.\n \n")
+
+def clear():
+    os.system('cls' if os.name=='nt' else 'clear')
+
+main()
+turno(1)
+turno(2)
